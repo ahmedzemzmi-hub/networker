@@ -27,6 +27,10 @@ main_menu() {
     option_2
   elif [ "$option" -eq 3 ]; then
     option_3
+  elif [ "$option" -eq 9 ]; then
+    printf '\033[1B'
+    echo "bye !"
+    exit
   fi
 }
 
@@ -62,14 +66,17 @@ option_2() {
   echo "    4. aggressive scan - scans for multible stuff at the same time"
   echo "    5. aborte"
   read -p "     ╰>>>> " option
-  read -p "enter target ip address: " target_ip_address
   if [ "$option" -eq 1 ]; then
+    read -p "enter target ip address: " target_ip_address
     nmap -sn $target_ip_address
   elif [ "$option" -eq 2 ]; then
+    read -p "enter target ip address: " target_ip_address
     nmap -sT $target_ip_address
   elif [ $option -eq 3 ]; then
+    read -p "enter target ip address: " target_ip_address
     nmap -sV $target_ip_address
   elif [ $option -eq 4 ]; then
+    read -p "enter target ip address: " target_ip_address
     nmap -A $target_ip_address
   elif [ $option -eq 5 ]; then
     echo "aborted !"
@@ -124,6 +131,45 @@ option_3() {
     echo "    6. send a file"
     echo "    7. receive a file"
     echo "    8. aborte"
+    read -p "     ╰>>>> " option
+    if [ "$option" -eq 1 ]; then
+      read -p "enter the port number (0-65535): " port
+      nc -l -p "$port"
+
+    elif [ "$option" -eq 2 ]; then
+      read -p "enter the ip address (.i.e 192.168.1.1): " ip_address
+      read -p "enter the port number (0-65535): " port
+      nc "$ip_address" "$port"
+
+    elif [ "$option" -eq 3 ]; then
+      read -p "enter the ip address (.i.e 192.168.1.1): " ip_address
+      read -p "enter the port number (0-65535): " port
+      nc -z "$ip_address" "$port"
+
+    elif [ "$option" -eq 4 ]; then
+      read -p "enter the ip address (.i.e 192.168.1.1): " ip_address
+      read -p "enter a range of ports (.i.e 1-1024) : " port
+      nc -z "$ip_address" "$port"
+
+    elif [ "$option" -eq 5 ]; then
+      read -p "enter the ip address (.i.e 192.168.1.1): " ip_address
+      read -p "enter the port number (0-65535): " port
+      nc -u "$ip_address" "$port"
+
+    elif [ "$option" -eq 6 ]; then
+      read -p "enter the port number (.i.e 0-65535): " port
+      read -p "enter the file name (.i.e received_file.txt): " receiver_file
+      nc -l "$port" >"$receiver_file"
+
+    elif [ "$option" -eq 7 ]; then
+      read -p "enter the ip address (.i.e 192.168.1.1): " ip_address
+      read -p "enter the port number (.i.e 0-65535): " port
+      read -p "enter the file name to be send (.i.e my_file.txt): " sender_file
+      nc "$ip_address" "$port" <"$sender_file"
+
+    elif [ "$option" -eq 8 ]; then
+      echo "aborted"
+    fi
   fi
 
 }
