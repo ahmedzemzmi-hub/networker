@@ -35,7 +35,7 @@ main_menu() {
     option_6
   elif [ "$option" -eq 7 ]; then
     option_7
-  elif [ "$option" -eq 9 ]; then
+  elif [ "$option" -eq 8 ]; then
     printf '\033[1B'
     echo "bye !"
     exit
