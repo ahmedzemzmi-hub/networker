@@ -2,7 +2,7 @@
 clear
 
 echo "welcome to the"
-echo "---(=========>  NETworker  <=========)---"
+echo "----((==========>    NETworker   <==========))----"
 echo "the best networking tool :-)
 "
 
@@ -271,6 +271,7 @@ option_6() {
 
 option_7() {
   ip route show
+  ip link
 }
 while true; do
   main_menu
