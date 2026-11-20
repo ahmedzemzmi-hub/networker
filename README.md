@@ -3,6 +3,7 @@ networker is a utility used for general networking stuff it includes basics like
 2. nmap scans
 3. remote connection
 4. ip addresses managing
+
 it works better on linux and needs these listed dependencies:
 1. nmap
 2. ping
